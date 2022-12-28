@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.data-jpa=4
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.devtools=4
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.h2=4
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web=6
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=apirest_javaradis
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.bootVersion=2.7.8-SNAPSHOT
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.description=API with Radis
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.groupId=com.mx.java
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.javaVersion=1.8
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.language=java
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.name=apirest_javaradis
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packageName=com.mx.apijavaradis
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packaging=jar
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.type=GRADLE
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.version=0.0.1-SNAPSHOT
+org.springframework.ide.eclipse.boot.wizard.initializr.url=https\://start.spring.io\n

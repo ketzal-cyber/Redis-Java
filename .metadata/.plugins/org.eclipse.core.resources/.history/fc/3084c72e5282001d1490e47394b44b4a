@@ -1,0 +1,21 @@
+package com.mx.java.radis.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
+import com.mx.java.radis.entity.Browser;
+import com.mx.java.radis.repository.BrowserRepository;
+
+public class BrowserService {
+
+	@Autowired
+	private BrowserRepository browserRepo;
+	
+	public Browser save(Browser browser){
+		return  browserRepo.save(browser);
+	}
+	
+	public Browser update(Browser browser) {
+		return browserRepo.save(browser);
+	}
+}

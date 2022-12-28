@@ -1,0 +1,5 @@
+package com.mx.java.radis.repository;
+
+public interface BrowserRepository {
+
+}

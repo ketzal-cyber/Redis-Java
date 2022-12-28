@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.buildship.ui.wizard.project.import">
+		<item key="project_location" value="/Users/angelmartinezmoreno/Downloads/sa_middleware-midiversion-deezer"/>
+		<item key="gradle_distribution" value="GRADLE_DISTRIBUTION(VERSION(6.8.3))"/>
+		<item key="gradle_user_home" value="/Users/angelmartinezmoreno/soft_app/software/gradle-6.8.3"/>
+		<item key="java_home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_341.jdk/Contents/Home"/>
+	</section>
+</section>
