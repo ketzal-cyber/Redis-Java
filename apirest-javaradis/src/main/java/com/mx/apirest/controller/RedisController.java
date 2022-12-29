@@ -1,6 +1,8 @@
 package com.mx.apirest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,10 @@ public class RedisController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired													// definir template de redis
+	private StringRedisTemplate redisTemplate;
+	
+	
 	private final String BASE_URL = "https://rickandmortyapi.com/api/character/";
 	
 	
@@ -27,9 +33,25 @@ public class RedisController {
 	public ResponseEntity<?> get(@PathVariable("id") Long id){
 		
 		try {
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
+			
+			
+													//iniciar operaciones con redis
+			ValueOperations<String, String> valueOperation = redisTemplate.opsForValue();
+			String data = valueOperation.get(getkey(id.toString()));
+			if(data != null && !data.isEmpty()) {
+				return new ResponseEntity<String>(data, headers, HttpStatus.OK);
+			}
+			
 			ResponseEntity<String> response = restTemplate.exchange(BASE_URL.concat(id.toString()), HttpMethod.GET, null, String.class);
+			
+			
+													// indicar la llave y  el valro a guardar en cache	
+			if(response.getStatusCodeValue() == 200) {
+				valueOperation.set(getkey(id.toString()), response.getBody());
+			}
 			
 			return new ResponseEntity<String>(response.getBody(), headers, HttpStatus.OK);
 		} catch (Exception e) {
@@ -37,6 +59,10 @@ public class RedisController {
 		}
 		
 		
+	}
+	
+	private String getkey(String id) {
+		return "Rick-".concat(id);
 	}
 
 }
