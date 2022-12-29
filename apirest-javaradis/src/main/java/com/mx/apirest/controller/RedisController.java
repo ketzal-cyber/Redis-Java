@@ -1,5 +1,7 @@
 package com.mx.apirest.controller;
 
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -40,6 +42,7 @@ public class RedisController {
 			
 													//iniciar operaciones con redis
 			ValueOperations<String, String> valueOperation = redisTemplate.opsForValue();
+													// busca en cache si esta lo regresa
 			String data = valueOperation.get(getkey(id.toString()));
 			if(data != null && !data.isEmpty()) {
 				return new ResponseEntity<String>(data, headers, HttpStatus.OK);
@@ -50,7 +53,7 @@ public class RedisController {
 			
 													// indicar la llave y  el valro a guardar en cache	
 			if(response.getStatusCodeValue() == 200) {
-				valueOperation.set(getkey(id.toString()), response.getBody());
+				valueOperation.set(getkey(id.toString()), response.getBody(), Duration.ofSeconds(120));
 			}
 			
 			return new ResponseEntity<String>(response.getBody(), headers, HttpStatus.OK);
