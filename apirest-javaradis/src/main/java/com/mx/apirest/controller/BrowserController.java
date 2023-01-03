@@ -1,9 +1,16 @@
 package com.mx.apirest.controller;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,14 +28,32 @@ import com.mx.apirest.service.BrowserService;
 @RequestMapping("/navegador")
 public class BrowserController {
 	
+	@Autowired													// definir template de redis
+	private StringRedisTemplate redisTemplate;
+
+	
 	@Autowired
 	BrowserService browserService;
 	
+//	@GetMapping
+//	public ArrayList<Browser> listar(){
+//		return (ArrayList<Browser>) browserService.listar();
+//	}
 	@GetMapping
 	public ArrayList<Browser> listar(){
+		//iniciar operaciones con redis
+		ValueOperations<String, String> valueOperation = redisTemplate.opsForValue();
+		
+		ArrayList<Browser> arrayToHashSet = browserService.listar();
+		
+		HashSet<Browser> hashSet = new HashSet<>(arrayToHashSet);
+		valueOperation.set("listBrowser", hashSet.toString(), Duration.ofSeconds(100));
+		
 		return (ArrayList<Browser>) browserService.listar();
 	}
 	
+	
+	// 
 	@PostMapping
 	public Browser guardar(@RequestBody Browser browser) {
 		return this.browserService.save(browser);

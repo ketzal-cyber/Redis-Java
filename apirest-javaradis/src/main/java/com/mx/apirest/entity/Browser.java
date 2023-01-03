@@ -26,7 +26,6 @@ public class Browser  {
 	}
 
 	public Browser(Long id, String name, String version) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.version = version;
@@ -54,6 +53,11 @@ public class Browser  {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	@Override
+	public String toString() {
+		return "Browser [id=" + id + ", name=" + name + ", version=" + version + "]";
 	}
 	
 	
