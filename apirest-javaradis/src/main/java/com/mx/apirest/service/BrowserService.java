@@ -35,8 +35,10 @@ public class BrowserService {
 		
 	}
 	
-	public Optional<Browser> findById(Long id){
-		return browserRepo.findById(id);
+	public Browser findById(Long id){
+		Optional<Browser> brow = browserRepo.findById(id);
+		Browser navegador = brow.get();
+		return navegador;
 	}
 	
 	

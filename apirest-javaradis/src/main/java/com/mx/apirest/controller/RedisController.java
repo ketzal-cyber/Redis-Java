@@ -24,7 +24,7 @@ public class RedisController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Autowired													// definir template de redis
+	@Autowired													// define un redisTemplate por default
 	private StringRedisTemplate redisTemplate;
 	
 	
@@ -40,7 +40,7 @@ public class RedisController {
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			
 			
-													//iniciar operaciones con redis
+										//iniciar iniciar operaciones radispara valores simples
 			ValueOperations<String, String> valueOperation = redisTemplate.opsForValue();
 													// busca en cache si esta lo regresa
 			String data = valueOperation.get(getkey(id.toString()));
