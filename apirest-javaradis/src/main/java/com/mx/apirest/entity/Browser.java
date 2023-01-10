@@ -2,6 +2,8 @@ package com.mx.apirest.entity;
 
 
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,8 +13,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "navegador")
-public class Browser  {
+public class Browser implements Serializable {
 	
+
+	private static final long serialVersionUID = -5527222373770740964L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
