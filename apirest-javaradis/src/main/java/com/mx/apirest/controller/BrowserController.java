@@ -67,10 +67,10 @@ public class BrowserController {
 		
 //		redisTemplateConn.opsForValue().set(CACHE_NAME, "JAVA");
 		
-		Map<Object, Object> operaciones = redisTemplateConn.opsForHash().entries(CACHE_NAME);
-		
-		System.out.println("Mapa devuelto");
-		System.out.println(operaciones);
+//		Map<Object, Object> operaciones = redisTemplateConn.opsForHash().entries(CACHE_NAME);
+//		System.out.println("Mapa devuelto");
+//		System.out.println(operaciones);
+		mostar(CACHE_NAME);
 		
 		return (ArrayList<Browser>) browserService.listar();
 	}
@@ -87,6 +87,7 @@ public class BrowserController {
 		// list
 //		Long operaciones = redisTemplateConn.opsForList().leftPush(name, email);
 //		Long operaciones = redisTemplateConn.opsForList().leftPush(CACHE_NAME, brow.toString());
+		
 		// Hash
 		//redisTemplateConn.opsForHash().put(CACHE_NAME, brow.getId(), brow);
 		guardarHash(CACHE_NAME, brow.getId(), brow);
@@ -139,9 +140,10 @@ public class BrowserController {
 		
 		//Hash
 		//redisTemplateConn.opsForHash().delete(CACHE_NAME, 2L);
-		Long del = redisTemplateConn.opsForHash().delete(CACHE_NAME, id);
-		System.out.println("Elemento Cache eliminado");
-		System.out.println(del);
+//		Long del = redisTemplateConn.opsForHash().delete(CACHE_NAME, id);
+//		System.out.println("Elemento Cache eliminado");
+//		System.out.println(del);
+		borrarHash(CACHE_NAME, id);
 		
 		boolean ok = this.browserService.delete(id);
 		if (ok) {
@@ -175,21 +177,32 @@ public class BrowserController {
 	}
 	
 	public void actualizar(String llave, String valor) {
-		String  key = redisTemplateConn.opsForValue().getAndSet(CACHE_NAME, "Python");
-		System.out.println("Elemento Cache");
-		System.out.println(key);
+		//ForHash
+		//redisTemplateConn.opsForHash().put(llave, llave, valor);
+		
+		// For Value
+//		String  key = redisTemplateConn.opsForValue().getAndSet(CACHE_NAME, "Python");
+//		System.out.println("Elemento Cache");
+//		System.out.println(key);
 	}
 	
 	public void mostar(String llave) {
-		Map<String, String> mapa = new HashMap<>();
-		mapa.put("1", "Java");
-		mapa.put("2", "Python");
-		mapa.put("3", "JavaScript");
 		
-		List<String> keys = Arrays.asList("1","2","3");
-		List<String> elemento = redisTemplateConn.opsForValue().multiGet(keys);
-		System.out.println("Elemento Cache");
-		System.out.println(elemento);
+		//ForHas
+		Map<Object, Object> operaciones = redisTemplateConn.opsForHash().entries(llave);
+		System.out.println("Mapa devuelto");
+		System.out.println(operaciones);
+		
+		//FORValue
+//		Map<String, String> mapa = new HashMap<>();
+//		mapa.put("1", "Java");
+//		mapa.put("2", "Python");
+//		mapa.put("3", "JavaScript");
+//		
+//		List<String> keys = Arrays.asList("1","2","3");
+//		List<String> elemento = redisTemplateConn.opsForValue().multiGet(keys);
+//		System.out.println("Elemento Cache");
+//		System.out.println(elemento);
 		
 //		String elemento = redisTemplateConn.opsForValue().get(CACHE_NAME);
 //		System.out.println("Elemento Cache");
@@ -203,7 +216,16 @@ public class BrowserController {
 	
 	public void borrar(String llave) {
 		
-		String del = redisTemplateConn.opsForValue().getAndDelete(CACHE_NAME);
+		//ForValue
+//		String del = redisTemplateConn.opsForValue().getAndDelete(CACHE_NAME);
+//		System.out.println("Elemento Cache eliminado");
+//		System.out.println(del);
+		
+		
+	}
+	public void borrarHash(String name, Long id) {
+		//ForHash
+		Long del = redisTemplateConn.opsForHash().delete(name, id);
 		System.out.println("Elemento Cache eliminado");
 		System.out.println(del);
 	}
